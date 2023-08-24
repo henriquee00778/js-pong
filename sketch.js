@@ -7,16 +7,16 @@ let raio = diametro / 2 ;
 //velocidade da bolinha
 let velocidadeXBolinha = 6;
 let velocidadeYBolinha = 6;
-let raqueteComprimento = 90;
-let raqueteAltura = 10;
+let raqueteComprimento = 10;
+let raqueteAltura = 90;
 
 //variáveis da raquete
-let xRaquete = 250;
-let yRaquete = 0;
+let xRaquete = 5;
+let yRaquete = 150;
 
 //variáveis do oponente
-let xRaqueteOponente = 250;
-let yRaqueteOponente = 390;
+let xRaqueteOponente = 585;
+let yRaqueteOponente = 150;
 let velocidadeYOponente;
 
 let colidiu = false;
@@ -83,17 +83,17 @@ function mostraRaquete(x,y){
 }
 
 function movimentaMinhaRaquete(){
-  if (keyIsDown(65)){
-    xRaquete -= 10;
+  if (keyIsDown(87)){
+    yRaquete -= 10;
   }
-  if (keyIsDown(68)){
-    xRaquete += 10;
+  if (keyIsDown(83)){
+    yRaquete += 10;
   }
 }
 
 function verificaColisaoRaquete(){
-  if (yBolinha - raio < yRaquete + raqueteAltura && xBolinha + raio < xRaquete + raqueteComprimento && xBolinha - raio > xRaquete){
-    velocidadeYBolinha *= -1;
+  if (xBolinha - raio < xRaquete + raqueteComprimento && yBolinha - raio < yRaquete + raqueteAltura && yBolinha + raio > yRaquete){
+    velocidadeXBolinha *= -1;
   }
 }
 
@@ -101,7 +101,7 @@ function verificaColisaoRaquete(x, y){
   colidiu = collideRectCircle(x, y,raqueteComprimento,raqueteAltura,
 xBolinha,yBolinha,raio);
   if (colidiu){
-    velocidadeYBolinha *= -1;
+    velocidadeXBolinha *= -1;
     raquetada.play();
   }
 }
@@ -109,8 +109,8 @@ xBolinha,yBolinha,raio);
 // Singleplayer
 
  function movimentaRaqueteOponente(){
-  velocidadeXOponente = xBolinha -xRaqueteOponente - raqueteComprimento / 2 - 30;
-  xRaqueteOponente += velocidadeXOponente
+  velocidadeYOponente = yBolinha -yRaqueteOponente - raqueteComprimento / 2 - 30;
+  yRaqueteOponente += velocidadeYOponente
 }
 
 // Multiplayer
@@ -140,11 +140,11 @@ function incluiPlacar(){
 }
 
 function marcaPonto(){
-  if (yBolinha > 395){
+  if (xBolinha > 590){
     meusPontos += 1;
     ponto.play();
   }
-  if (yBolinha <5){
+  if (xBolinha < 10){
     pontosDoOponente += 1;
     ponto.play();
   }
